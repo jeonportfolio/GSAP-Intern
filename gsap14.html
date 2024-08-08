@@ -93,6 +93,14 @@
             overflow: hidden;
             border-radius: 10px;
         }
+
+        .parallax__item__imgWrap2 {
+            width: 50%;
+            padding-bottom: 18%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
         .parallax__item__img {
             position: absolute;
             left: -10%; 
@@ -128,6 +136,15 @@
             font-size: 2.5rem;
         }
 
+        @media (max-width: 500px) {
+            #section2 .parallax__item__desc2 {
+                margin-left: 5%; /* 예시: 마진을 줄임 */
+                margin-top: 10%; /* 예시: 마진을 줄임 */
+                font-size: 1.5rem; /* 예시: 글꼴 크기를 줄임 */
+            }
+        }
+     
+
         #section2 .parallax__item__desc2-1{
             margin-left: 15%;
             margin-top: 15%;
@@ -137,12 +154,31 @@
         #section2 .parallax__item__img {
             background-image: url(assets/img/images02.jpg);
          }
-        #section3 .parallax__item__img {
-            background-image: url(assets/img/images03@2.jpg);
+
+        #section3 .parallax__item__desc3 {
+                margin-left: 10%;
+                margin-top: 20%;
+                font-size: 4rem;
         }
+       
         #section4 .parallax__item__img {
-            background-image: url(assets/img/images04@2.jpg);
+            background-image: url(assets/img/intern11.jpg);
+            left: -10%; 
+            top: -5%;
+            width: 100%;
+            height: 80%;
+             bottom: 20%;
+            filter: saturate(0%);
+            transition: all 1s;
         }
+
+
+        #section4 .parallax__item__desc4 {
+                margin-left: 20%;
+                margin-top: 10%;
+                font-size: 3rem;
+        }
+  
         #section5 .parallax__item__img {
             background-image: url(assets/img/images05@2.jpg);
         }
@@ -203,7 +239,7 @@
     <main id="parallax__cont">
         <section id="section1" class="parallax__item">
             <span class="parallax__item__num">01</span>
-                <p class="parallax__item__desc1">머니스테이션 인턴과정</p>
+                <p class="parallax__item__desc1"> 인턴과정 INTRO</p>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -216,7 +252,11 @@
                 <div class="parallax__item__img"></div>
             </figure>
             <p class="parallax__item__desc2">현장실습 & 인턴 진행기간 
-                <span class="parallax__item__desc2-1"> <br><br> 2024.01.01~2024.2.25 (대학연계 현장실습) <br> 2024.03.04 ~ 2024.10.31 (파트타임 인턴 (연장))</span>
+                <span class="parallax__item__desc2-1"> 
+                    <br><br>(주)머니스테이션에서 근무
+                    <br> 2024.01.01~2024.2.23 (대학연계 현장실습) 
+                    <br> 2024.03.04 ~ 2024.10.31 (파트타임 인턴 (연장))
+                </span>
             </p>
            
         </section>
@@ -228,14 +268,16 @@
                 <figure class="parallax__item__imgWrap">
                     <div class="parallax__item__img"></div>
                 </figure>
+                    <p class="parallax__item__desc3">담당업무 & 업무평가</p>
             </section>
             <!-- //section3 -->
 
             <section id="section4" class="parallax__item">
                 <span class="parallax__item__num">04</span>
-                <figure class="parallax__item__imgWrap img4">
-                    <div class="parallax__item__img"></div>
-                </figure>
+                    <figure class="parallax__item__imgWrap2">
+                            <div class="parallax__item__img"></div>
+                    </figure>
+                <p class="parallax__item__desc4">담당업무는?</p>
             </section>
             <!-- //section4 -->
 
@@ -288,6 +330,7 @@
             const horizontal = document.querySelector("#horizontal");
             const sections = gsap.utils.toArray("#horizontal > section");
             const box2 = document.querySelector("#section2 .parallax__item__img");
+            const box4 = document.querySelector("#section4 .parallax__item__img");
 
             let scrollTween = gsap.to(sections, {
                 xPercent: -100 * (sections.length - 1),
@@ -305,20 +348,21 @@
 
 
 
-            gsap.to(".img4", {
-                y: 0,
-                duration: 2,
-                ease: "elastic",
-                scrollTrigger: {
-                    trigger: ".img4",
-                    containerAnimation: scrollTween,
-                    start: "left center",
-                    toggleActions: "play none reverse none",
-                    markers: false,
-                    id: "img4"
-                }
-            });
+            // gsap.to(".img4", {
+            //     y: 0,
+            //     duration: 2,
+            //     ease: "elastic",
+            //     scrollTrigger: {
+            //         trigger: ".img4",
+            //         containerAnimation: scrollTween,
+            //         start: "left center",
+            //         toggleActions: "play none reverse none",
+            //         markers: false,
+            //         id: "img4"
+            //     }
+            // });
 
+           
             gsap.to(".img5", {
                 rotation: 720,
                 duration: 2,
@@ -346,6 +390,26 @@
                     id: "img6"
                 }
             });
+
+
+            //section 4 제목 "담당업무는?"
+            gsap.utils.toArray(".parallax__item__desc4").forEach(item => {
+            ScrollTrigger.create({
+                trigger: item,
+                start: "top -150%",
+                end: "bottom 20%",
+                markers: false,
+                onEnter: () => {animate(item)} //애니메이션이라는 함수 안에 item을 가져와라
+            });
+            item.style.opacity = "0";
+        });
+
+        const animate = (item) => {     //애니메이션이라는 함수를 만드는 과정   
+            gsap.fromTo(item, 
+            {autoAlpha: 0, x:400, y:0},  //나타나기 효과 fromTo를 쓰면 전,후 효과를 사용할 수 있다.
+            {autoAlpha: 1, x:0, y:0, duration:5, overwrite: "auto", ease: "expo"} //overwrite의 기능 한 이벤트당 한번만 작동하게 해줌
+            );
+        }
 
     </script>
 </body>
