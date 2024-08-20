@@ -92,6 +92,33 @@
             transform: scale(1.025);
         }
 
+        /* 진행바  */
+         .parallax__progress progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10000;
+            width: 100%;
+            height: 5px;
+            border: none;
+            background: transparent;
+        }
+
+        progress::-webkit-progress-bar {
+            background: transparent;   
+        }
+
+        progress::-webkit-progress-value {
+            background: linear-gradient(to left, #db38b5,#01b3e3,#25ce7b,#fdc741,#ff6b01,#fc4236);
+            background-attachment: fixed;
+        }
+        /* webkit 은 크롬이나 사파리를 뜻함 베타버젼이기 때문에 */
+        progress::-moz-progress-bar {
+            background: linear-gradient(to left, #db38b5,#01b3e3,#25ce7b,#fdc741,#ff6b01,#fc4236);
+            background-attachment: fixed;
+        }
+        /* 모질라에서도 쓰려면 moz도 써야함 */
+
         #section1 .parallax__item__img {
             background-image: url(assets/img/images01@2.jpg);
         }
@@ -159,7 +186,7 @@
 
         #section5 .parallax__item__desc5  {
                 margin-left: 7%;
-                margin-top: 8%;
+                margin-top: 5%;
                 font-size: 3rem;
         }
 
@@ -224,7 +251,14 @@
         
        
     </header>
-    <!-- //parallax__title  -->
+    <!-- 헤더 -->
+
+    <div class="parallax__progress">
+        <progress max="100" value="0"></progress>
+    </div>
+
+      <!-- 진행바  -->
+
 
     <main id="parallax__cont">
         <section id="section1" class="parallax__item">
@@ -241,7 +275,7 @@
             <figure class="parallax__item__imgWrap1">
                 <div class="parallax__item__img"></div>
             </figure>
-            <p class="parallax__item__desc2">현장실습 & 인턴 진행기간 
+            <p class="parallax__item__desc2">▶현장실습 & 인턴 진행기간 
                 <span class="parallax__item__desc2-1"> 
                     <br><br>(주)머니스테이션에서 근무
                     <br> 2024.01.01~2024.2.23 (대학연계 현장실습) 
@@ -267,7 +301,7 @@
                     <figure class="parallax__item__imgWrap1">
                             <div class="parallax__item__img"></div>
                     </figure>
-                <p class="parallax__item__desc4">담당업무는?
+                <p class="parallax__item__desc4">▶담당업무는?
                     <span class="parallax__item__desc4-1"> 
 
                         <br><br><em>◎[직무명]</em> - 금융시장 리서치 및 콘텐츠 마케팅
@@ -285,16 +319,21 @@
                 <figure class="parallax__item__imgWrap1">
                     <div class="parallax__item__img"></div>
                 </figure>
-                <p class="parallax__item__desc5">작업 예시
-                    <span class="parallax__item__desc5-1 split"> 
+                <p class="parallax__item__desc5">▶작업 예시
+                    <span class="parallax__item__desc5-1 "> 
 
                         <br><em>◎[기업분석]</em><br>
                         -> 현재의 시장을 기반으로 기업의 상황을 분석(경동나비엔)<br>
                         <a href = "https://blog.naver.com/turtleweb/223299854251">자세히보기</a>
 
-                        <br> <em>◎[직무목표]</em> - 금융 콘텐츠 기획 /리서치/ 작성을 통한 데이터/<br>퍼포먼스 마케팅 참여 
+                        <br> <em>◎[경제분석]</em><br> 
+                        -> 한국경제의 분석 <br>
+                        <a href = "https://blog.naver.com/turtleweb/223399727680">자세히보기(1편)</a>
                         
-                        <br> <em>◎[직무개요]</em> - 금융투자 리서치 콘텐츠 제작, 금융 콘텐츠 <br>플랫폼 FEED 관리, 기타 업무 지원
+                        <br> <em>◎[시장분석]</em><br>
+                        -> 연준의 금리인하 & 인플레이션 <br>
+                        <a href = "https://blog.naver.com/turtleweb/223428410698">자세히보기</a>
+
                     </span>
                 </p>
                 
@@ -338,12 +377,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollToPlugin.min.js"></script>
-    <script src="https://unpkg.com/split-type"></script>
+    
     <script>
             const horizontal = document.querySelector("#horizontal");
             const sections = gsap.utils.toArray("#horizontal > section");
             const box2 = document.querySelector("#section2 .parallax__item__img");
             const box4 = document.querySelector("#section4 .parallax__item__img");
+
+
+            // 진행바 
+            gsap.to("progress", {
+            value: 100,
+            ease: "none",
+            scrollTrigger: {scrub:0.3}
+            });
 
             let scrollTween = gsap.to(sections, {
                 xPercent: -100 * (sections.length - 1),
@@ -424,32 +471,8 @@
             );
         }
 
-        // 업무예시 글자 쪼개서 보여주는 애니메이션
-        const targets = gsap.utils.toArray(".split");
-
-        targets.forEach((target) => {
-            let SplitClient = new SplitType(target, { type: "lines, words, chars" });
-            let lines = SplitClient.lines;
-            let words = SplitClient.words;
-            let chars = SplitClient.chars;
-        
-            gsap.from(chars, {      //한단어씩 효과주고 싶으면 chars 한라인으로 효과주고 싶다면 lines로
-                yPercent: 100,
-                opacity: 0,
-                duration: 1,
-                ease: "circ.out",
-                stagger: {
-                    amount: 1,
-                    from: "random"
-                },
-                scrollTrigger: {
-                    trigger: target,
-                    start: "top bottom",
-                    end: "+=800",
-                    markers: false,
-                }
-            });
-        });
+       
+       
 
     </script>
 </body>
