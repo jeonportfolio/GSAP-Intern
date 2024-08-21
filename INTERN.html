@@ -263,7 +263,7 @@
     <main id="parallax__cont">
         <section id="section1" class="parallax__item">
             <span class="parallax__item__num">01</span>
-                <p class="parallax__item__desc1"> 머니스테이션 인턴과정 </p>
+                <p class="parallax__item__desc1 split"> 머니스테이션 인턴과정 </p>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -275,7 +275,7 @@
             <figure class="parallax__item__imgWrap1">
                 <div class="parallax__item__img"></div>
             </figure>
-            <p class="parallax__item__desc2">▶현장실습 & 인턴 진행기간 
+            <p class="parallax__item__desc2">▶현장실습 & 인턴 진행
                 <span class="parallax__item__desc2-1"> 
                     <br><br>(주)머니스테이션에서 근무
                     <br> 2024.01.01~2024.2.23 (대학연계 현장실습) 
@@ -292,7 +292,7 @@
                 <figure class="parallax__item__imgWrap">
                     <div class="parallax__item__img"></div>
                 </figure>
-                    <p class="parallax__item__desc3">담당업무 & 업무평가</p>
+                    <p class="parallax__item__desc3 split">담당업무 & 업무평가</p>
             </section>
             <!-- //section3 -->
 
@@ -377,6 +377,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollToPlugin.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
     
     <script>
             const horizontal = document.querySelector("#horizontal");
@@ -452,7 +453,7 @@
             });
 
 
-            //section 4 제목 "담당업무는?"
+            //section 4  "담당업무는?"
             gsap.utils.toArray(".parallax__item__desc4").forEach(item => {
             ScrollTrigger.create({
                 trigger: item,
@@ -470,6 +471,52 @@
             {autoAlpha: 1, x:0, y:0, duration:5, overwrite: "auto", ease: "expo"} //overwrite의 기능 한 이벤트당 한번만 작동하게 해줌
             );
         }
+
+
+        //제목 움직임 
+
+        const targets = gsap.utils.toArray(".split");
+
+        targets.forEach((target) => {
+            let SplitClient = new SplitType(target, { type: "lines, words, chars" });
+            let lines = SplitClient.lines;
+            let words = SplitClient.words;
+            let chars = SplitClient.chars;
+        
+            gsap.from(chars, {      //한단어씩 효과주고 싶으면 chars 한라인으로 효과주고 싶다면 lines로
+                yPercent: 100,
+                opacity: 0,
+                duration: 1,
+                ease: "circ.out",
+                stagger: {
+                    amount: 1,
+                    from: "random"
+                },
+                scrollTrigger: {
+                    trigger: target,
+                    start: "top bottom",
+                    end: "+=400",
+                    markers: false,
+                }
+            });
+        });
+
+
+        //숫자 움직임 
+        gsap.utils.toArray(".parallax__item__num").forEach(item => {
+        gsap.to(item, {
+            xPercent: -150,
+            ease:"none",
+            duration:0.5,
+            scrollTrigger: {
+                trigger: item,
+                start: "top bottom",
+                end:"bottom top",
+                markers: false,
+                scrub:0.5
+            }
+            });
+         });
 
        
        
