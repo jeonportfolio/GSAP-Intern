@@ -115,6 +115,23 @@
             filter: saturate(100%);
             transition: all 1s;
         }
+
+        .parallax__item__img8 {
+            position: absolute;
+            left: 20%; 
+            top: -5%;
+            width: 80%; /* 이미지의 너비를 80%로 줄임 */
+            height: 60%; /* 이미지의 높이를 60%로 줄임 */
+            margin-top: 20%;
+            margin-left: 0;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            filter: saturate(100%);
+            transition: all 1s;
+        }
+
+
         .parallax__item__img:hover {
             filter: saturate(100%);
             transform: scale(1.025);
@@ -236,6 +253,18 @@
             border-radius: 0;
         }
 
+        #section6 .parallax__item__desc6 {
+                margin-left: 10%;
+                margin-top: 20%;
+                font-size: 4rem;
+        }
+
+        #section9 .parallax__item__desc6 {
+                margin-left: 30%;
+                margin-top: 20%;
+                font-size: 4rem;
+        }
+
 
 
  
@@ -250,16 +279,14 @@
             background-image: url(assets/img/image06@2.jpg);
         }
         
-        #section7 .parallax__item__img6 {
+        #section7 .parallax__item__img7 {
             background-image: url(assets/img/image06@2.jpg);
         }
-        #section8 .parallax__item__img6 {
-            background-image: url(assets/img/images08@2.jpg);
+        #section8 .parallax__item__img8 {
+            background-image: url(assets/img/intern7.jpg);
         }
-        #section9 .parallax__item__img {
-            background-image: url(assets/img/images09@2.jpg);
-        }
-        #section1, #section3, #section5, #section7, #section9 {
+        
+        #section1, #section3, #section5, #section6, #section8 {
             background-color: #111;
         }
 
@@ -374,7 +401,8 @@
 
             <section id="section6" class="parallax__item">
                 <span class="parallax__item__num">06</span>
-                <figure class="parallax__item__imgWrap2 img6">
+                    <p class="parallax__item__desc6 split"> 인턴활동 기여&성과 </p>
+                <figure class="parallax__item__imgWrap img6">
                     <div class="parallax__item__img6"></div>
                 </figure>
             </section>
@@ -391,14 +419,15 @@
 
         <section id="section8" class="parallax__item">
             <span class="parallax__item__num">08</span>
-            <figure class="parallax__item__imgWrap">
-                <div class="parallax__item__img"></div>
+            <figure class="parallax__item__imgWrap2 img8">
+                <div class="parallax__item__img8"></div>
             </figure>
         </section>
         <!-- //section8 -->
 
         <section id="section9" class="parallax__item">
             <span class="parallax__item__num">09</span>
+                <p class="parallax__item__desc6 split"> 감사합니다!!😸😸 </p>
             <figure class="parallax__item__imgWrap">
                 <div class="parallax__item__img"></div>
             </figure>
@@ -479,23 +508,69 @@
                     containerAnimation: scrollTween,
                     start: "left center",
                     toggleActions: "play none reverse none",
-                    markers: true,
+                    markers: false,
                     id: "img7"
                 }
             });
 
 
-            //section 4  "담당업무는?"
-            gsap.utils.toArray(".parallax__item__desc4").forEach(item => {
+            gsap.to(".img8", {
+                scale: 1.5,
+                duration: 5,
+                ease: "elastic",
+                scrollTrigger: {
+                trigger: ".img8",
+                start: "top center",
+                toggleActions: "play none reverse none",
+                markers: false,
+                id: "img8"
+                }
+            });    
+
+
+           
+
+
+           
+
+
+            //section 설명 애니메이션 
+            //section2
+            gsap.utils.toArray(".parallax__item__desc2").forEach(item => {
             ScrollTrigger.create({
                 trigger: item,
-                start: "top -150%",
+                start: "top 100%",
                 end: "bottom 20%",
                 markers: false,
                 onEnter: () => {animate(item)} //애니메이션이라는 함수 안에 item을 가져와라
             });
             item.style.opacity = "0";
         });
+
+            //section4
+            gsap.utils.toArray(".parallax__item__desc4").forEach(item => {
+            ScrollTrigger.create({
+                trigger: item,
+                start: "top -110%",
+                end: "bottom 20%",
+                markers: false,
+                onEnter: () => {animate(item)} //애니메이션이라는 함수 안에 item을 가져와라
+            });
+            item.style.opacity = "0";
+        });
+
+             //section5
+             gsap.utils.toArray(".parallax__item__desc5").forEach(item => {
+            ScrollTrigger.create({
+                trigger: item,
+                start: "top -250%",
+                end: "bottom 20%",
+                markers: false,
+                onEnter: () => {animate(item)} //애니메이션이라는 함수 안에 item을 가져와라
+            });
+            item.style.opacity = "0";
+        });
+
 
         const animate = (item) => {     //애니메이션이라는 함수를 만드는 과정   
             gsap.fromTo(item, 
@@ -532,6 +607,8 @@
                 }
             });
         });
+
+
 
 
         //숫자 움직임 
