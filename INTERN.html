@@ -72,6 +72,18 @@
             border-radius: 10px;
         }
 
+        .parallax__item__imgWrap2 {
+            width: 60%;
+            padding-bottom: 33%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transform-origin: 60% 50%;
+        }
+
+
+       
+
 
         .parallax__item__img {
             position: absolute;
@@ -81,6 +93,22 @@
             height: 80%;
             margin-top: 20%;
             margin-left: 20%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            filter: saturate(100%);
+            transition: all 1s;
+        }
+
+        
+        .parallax__item__img7 {
+            position: absolute;
+            left: 20%; 
+            top: -5%;
+            width: 80%; /* 이미지의 너비를 80%로 줄임 */
+            height: 60%; /* 이미지의 높이를 60%로 줄임 */
+            margin-top: 20%;
+            margin-left: 0;
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
@@ -208,20 +236,24 @@
             border-radius: 0;
         }
 
-    
+
+
+ 
         
 
   
         #section5 .parallax__item__img {
             background-image: url(assets/img/task.jpg);
         }
+
         #section6 .parallax__item__img {
-            background-image: url(assets/img/images06@2.jpg);
+            background-image: url(assets/img/image06@2.jpg);
         }
-        #section7 .parallax__item__img {
-            background-image: url(assets/img/images07@2.jpg);
+        
+        #section7 .parallax__item__img6 {
+            background-image: url(assets/img/image06@2.jpg);
         }
-        #section8 .parallax__item__img {
+        #section8 .parallax__item__img6 {
             background-image: url(assets/img/images08@2.jpg);
         }
         #section9 .parallax__item__img {
@@ -292,7 +324,7 @@
                 <figure class="parallax__item__imgWrap">
                     <div class="parallax__item__img"></div>
                 </figure>
-                    <p class="parallax__item__desc3 split">담당업무 & 업무평가</p>
+                    <p class="parallax__item__desc3 split">담당업무 & 작업예시</p>
             </section>
             <!-- //section3 -->
 
@@ -301,7 +333,7 @@
                     <figure class="parallax__item__imgWrap1">
                             <div class="parallax__item__img"></div>
                     </figure>
-                <p class="parallax__item__desc4">▶담당업무는?
+                <p class="parallax__item__desc4">▶담당업무 
                     <span class="parallax__item__desc4-1"> 
 
                         <br><br><em>◎[직무명]</em> - 금융시장 리서치 및 콘텐츠 마케팅
@@ -328,8 +360,8 @@
 
                         <br> <em>◎[경제분석]</em><br> 
                         -> 한국경제의 분석 <br>
-                        <a href = "https://blog.naver.com/turtleweb/223399727680">자세히보기(1편)</a>
-                        
+                        <a href = "https://blog.naver.com/turtleweb/223399727680">자세히보기(1편)</a>&nbsp;&nbsp;
+                        <a href = "https://blog.naver.com/turtleweb/223556250997">자세히보기(2편)</a>
                         <br> <em>◎[시장분석]</em><br>
                         -> 연준의 금리인하 & 인플레이션 <br>
                         <a href = "https://blog.naver.com/turtleweb/223428410698">자세히보기</a>
@@ -342,16 +374,16 @@
 
             <section id="section6" class="parallax__item">
                 <span class="parallax__item__num">06</span>
-                <figure class="parallax__item__imgWrap img6">
-                    <div class="parallax__item__img"></div>
+                <figure class="parallax__item__imgWrap2 img6">
+                    <div class="parallax__item__img6"></div>
                 </figure>
             </section>
             <!-- //section6 -->
 
             <section id="section7" class="parallax__item">
                 <span class="parallax__item__num">07</span>
-                <figure class="parallax__item__imgWrap img7">
-                    <div class="parallax__item__img"></div>
+                <figure class="parallax__item__imgWrap2 img7">
+                    <div class="parallax__item__img7"></div>
                 </figure>
             </section>
             <!-- //section7 -->
@@ -438,17 +470,17 @@
                 }
             });
 
-            gsap.to(".img6", {
+            gsap.to(".img7", {
                 scale: 1.5,
-                duration: 2,
+                duration: 5,
                 ease: "elastic",
                 scrollTrigger: {
-                    trigger: ".img6",
+                    trigger: ".img7",
                     containerAnimation: scrollTween,
                     start: "left center",
                     toggleActions: "play none reverse none",
-                    markers: false,
-                    id: "img6"
+                    markers: true,
+                    id: "img7"
                 }
             });
 
